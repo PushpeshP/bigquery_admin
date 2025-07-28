@@ -1,7 +1,7 @@
 import os
 from google.cloud import bigquery
 
-# Use the path set by secret manager for service account JSON
+#Use the path set by secret manager for service account JSON
 credentials_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 if not credentials_path:
     raise Exception("GOOGLE_APPLICATION_CREDENTIALS not set")
