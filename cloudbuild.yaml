@@ -15,6 +15,7 @@ steps:
           --platform=managed \
           --region=us-central1 \
           --allow-unauthenticated \
+          --service-account=bigquery-admin@e-outrider-466612-u0.iam.gserviceaccount.com \
           --update-secrets=GOOGLE_APPLICATION_CREDENTIALS=bq-sa-key:latest
 
 options:
