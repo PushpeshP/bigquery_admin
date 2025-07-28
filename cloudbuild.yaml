@@ -6,16 +6,16 @@ steps:
     args: ['push', 'gcr.io/$PROJECT_ID/bq-csv-uploader']
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
+    entrypoint: bash
     args:
-      - '-c'
+      - -c
       - |
-        gcloud run deploy bq-csv-uploader \\
-        --image=gcr.io/$PROJECT_ID/bq-csv-uploader \\
-        --platform=managed \\
-        --region=us-central1 \\
-        --allow-unauthenticated \\
-        --update-secrets=GOOGLE_APPLICATION_CREDENTIALS=bq-sa-key:latest
+        gcloud run deploy bq-csv-uploader \
+          --image=gcr.io/$PROJECT_ID/bq-csv-uploader \
+          --platform=managed \
+          --region=us-central1 \
+          --allow-unauthenticated \
+          --update-secrets=GOOGLE_APPLICATION_CREDENTIALS=bq-sa-key:latest
 
 options:
   logging: CLOUD_LOGGING_ONLY
