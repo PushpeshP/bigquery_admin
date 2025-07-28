@@ -16,7 +16,7 @@ job_config = bigquery.LoadJobConfig(
     source_format=bigquery.SourceFormat.CSV,
 )
 
-with open("sample.csv", "rb") as source_file:
+with open("customers.csv", "rb") as source_file:
     job = client.load_table_from_file(source_file, table_id, job_config=job_config)
 
 job.result()
