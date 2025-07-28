@@ -10,15 +10,12 @@ steps:
     args:
       - '-c'
       - |
-        gcloud run deploy bq-csv-uploader \
-        --image=gcr.io/$PROJECT_ID/bq-csv-uploader \
-        --platform=managed \
-        --region=us-central1 \
-        --allow-unauthenticated \
+        gcloud run deploy bq-csv-uploader \\
+        --image=gcr.io/$PROJECT_ID/bq-csv-uploader \\
+        --platform=managed \\
+        --region=us-central1 \\
+        --allow-unauthenticated \\
         --update-secrets=GOOGLE_APPLICATION_CREDENTIALS=bq-sa-key:latest
 
 options:
   logging: CLOUD_LOGGING_ONLY
-  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
-region: asia-south1
-
