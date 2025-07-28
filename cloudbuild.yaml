@@ -18,4 +18,4 @@ steps:
         --update-secrets=GOOGLE_APPLICATION_CREDENTIALS=bq-sa-key:latest
 
 options:
-  logging: REGIONAL_USER_OWNED_BUCKET
+  logging: NONE
