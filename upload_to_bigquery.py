@@ -5,7 +5,7 @@ import pandas as pd
 # Check environment variable path
 print("Auth JSON path:", os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
 
-#  Initialize BigQuery client
+# Initialize BigQuery client
 client = bigquery.Client()
 
 # Load CSV file
