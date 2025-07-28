@@ -11,14 +11,16 @@ steps:
       '--image', 'gcr.io/$PROJECT_ID/bq-csv-uploader',
       '--platform', 'managed',
       '--region', 'us-central1',
-      '--set-env-vars', 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/bq-sa-key',
-      '--allow-unauthenticated'
+      '--allow-unauthenticated',
+      '--set-env-vars', 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/bq-sa-key'
     ]
+    env:
+      - GOOGLE_APPLICATION_CREDENTIALS=/secrets/bq-sa-key
 
 availableSecrets:
   secretManager:
     - versionName: projects/$PROJECT_ID/secrets/bq-sa-key/versions/latest
       env: 'GOOGLE_APPLICATION_CREDENTIALS'
-      
+
 options:
   logging: CLOUD_LOGGING_ONLY
