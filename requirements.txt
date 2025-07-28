@@ -1,2 +1,4 @@
 google-cloud-bigquery
 pandas
+google-auth
+

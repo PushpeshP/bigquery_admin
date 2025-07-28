@@ -1,27 +1,23 @@
-from google.cloud import bigquery
-import pandas as pd
 import os
+from google.cloud import bigquery
 
-def main():
-    print("✅ Starting BigQuery Upload")
-    key_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "/secrets/bq-sa-key")
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
+# Use the path set by secret manager for service account JSON
+credentials_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+if not credentials_path:
+    raise Exception("GOOGLE_APPLICATION_CREDENTIALS not set")
 
-    client = bigquery.Client()
-    df = pd.read_csv("customers.csv")
+client = bigquery.Client()
 
-    table_id = "e-outrider-466612-u0.demo_dataset.customers"
+table_id = "e-outrider-466612-u0.demo_dataset.customers"
 
-    job_config = bigquery.LoadJobConfig(
-        write_disposition="WRITE_TRUNCATE",
-        autodetect=True,
-        source_format=bigquery.SourceFormat.CSV,
-        skip_leading_rows=1,
-    )
+job_config = bigquery.LoadJobConfig(
+    autodetect=True,
+    skip_leading_rows=1,
+    source_format=bigquery.SourceFormat.CSV,
+)
 
-    job = client.load_table_from_dataframe(df, table_id, job_config=job_config)
-    job.result()
-    print(f"✅ Successfully uploaded to {table_id}")
+with open("sample.csv", "rb") as source_file:
+    job = client.load_table_from_file(source_file, table_id, job_config=job_config)
 
-if __name__ == "__main__":
-    main()
+job.result()
+print(f"✅ Loaded data into {table_id}")
