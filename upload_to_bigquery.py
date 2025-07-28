@@ -3,7 +3,7 @@ from google.cloud import bigquery
 import pandas as pd
 
 #Check environment variable path
-print("Auth JSON path:", os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
+#print("Auth JSON path:", os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
 
 # Initialize BigQuery client
 client = bigquery.Client()
