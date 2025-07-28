@@ -8,7 +8,7 @@ if not credentials_path:
 
 client = bigquery.Client()
 
-table_id = "e-outrider-466612-u0.demo_dataset.customers"
+table_id = "e-outrider-466612-u0.demo_dataset.customers_new"
 
 job_config = bigquery.LoadJobConfig(
     autodetect=True,
@@ -16,7 +16,7 @@ job_config = bigquery.LoadJobConfig(
     source_format=bigquery.SourceFormat.CSV,
 )
 
-with open("customers.csv", "rb") as source_file:
+with open("sample.csv", "rb") as source_file:
     job = client.load_table_from_file(source_file, table_id, job_config=job_config)
 
 job.result()
