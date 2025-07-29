@@ -2,13 +2,13 @@ import os
 from google.cloud import bigquery
 from google.oauth2 import service_account
 
-# Use path from Secret Manager
+# Path provided by secret injected into container at runtime
 key_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 
-if not key_path or not os.path.exists(key_path):
-    raise Exception(f"GOOGLE_APPLICATION_CREDENTIALS not set or file not found at {key_path}")
+if not key_path:
+    raise Exception("GOOGLE_APPLICATION_CREDENTIALS not set")
 
-# Load credentials manually
+# Load credentials
 credentials = service_account.Credentials.from_service_account_file(key_path)
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
 
