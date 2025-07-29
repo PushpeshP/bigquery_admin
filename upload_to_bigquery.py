@@ -12,7 +12,7 @@ job_config = bigquery.LoadJobConfig(
     schema=[
         bigquery.SchemaField("name", "STRING"),
         bigquery.SchemaField("email", "STRING"),
-        bigquery.SchemaField("age", "STRING"),
+        bigquery.SchemaField("age", "INTEGER"),
         bigquery.SchemaField("city", "STRING"),
     ],
     skip_leading_rows=1,
