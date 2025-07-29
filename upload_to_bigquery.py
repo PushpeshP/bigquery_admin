@@ -1,6 +1,6 @@
 from google.cloud import bigquery
 
-# Let Google Cloud SDK auto-discover credentials via env var
+#Let Google Cloud SDK auto-discover credentials via env var
 client = bigquery.Client()
 
 table_id = "e-outrider-466612-u0.demo_dataset.customers_new"
