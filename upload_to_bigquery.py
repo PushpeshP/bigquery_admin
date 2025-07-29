@@ -1,28 +1,23 @@
 import os
 from google.cloud import bigquery
-from google.oauth2 import service_account
 
-# Path provided by secret injected into container at runtime
-key_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+# This is the secret file mounted by Cloud Run
+credentials_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 
-if not key_path:
-    raise Exception("GOOGLE_APPLICATION_CREDENTIALS not set")
+if not os.path.exists(credentials_path):
+    raise Exception(f"Credential file not found: {credentials_path}")
 
-# Load credentials
-credentials = service_account.Credentials.from_service_account_file(key_path)
-client = bigquery.Client(credentials=credentials, project=credentials.project_id)
+# Client will auto-detect credentials from env var
+client = bigquery.Client()
 
-# Table info
 table_id = "e-outrider-466612-u0.demo_dataset.customers_new"
 
-# Job config
 job_config = bigquery.LoadJobConfig(
     autodetect=True,
     skip_leading_rows=1,
     source_format=bigquery.SourceFormat.CSV,
 )
 
-# Load file
 with open("sample.csv", "rb") as source_file:
     job = client.load_table_from_file(source_file, table_id, job_config=job_config)
 
