@@ -1,13 +1,12 @@
 import os
 from google.cloud import bigquery
 
-# This is the secret file mounted by Cloud Run
 credentials_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 
-if not os.path.exists(credentials_path):
-    raise Exception(f"Credential file not found: {credentials_path}")
+# ✅ Secret file must be a real file
+if not credentials_path or not os.path.exists(credentials_path):
+    raise Exception(f"Credential file not found or not mounted: {credentials_path}")
 
-# Client will auto-detect credentials from env var
 client = bigquery.Client()
 
 table_id = "e-outrider-466612-u0.demo_dataset.customers_new"
