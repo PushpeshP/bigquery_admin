@@ -13,7 +13,7 @@ steps:
       - 'bq-csv-uploader-job'
       - '--image=gcr.io/$PROJECT_ID/bq-csv-uploader'
       - '--region=us-central1'
-      - '--update-secrets=GOOGLE_APPLICATION_CREDENTIALS=bq-sa-key:latest'
+     # - '--update-secrets=GOOGLE_APPLICATION_CREDENTIALS=bq-sa-key:latest'
       - '--service-account=bigquery-admin@e-outrider-466612-u0.iam.gserviceaccount.com'
 
   - name: 'gcr.io/cloud-builders/gcloud'
